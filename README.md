@@ -18,6 +18,7 @@ The environment is custom code using Gymnasium.
 ---
 
 ## All My Experiments 
+**One important note:** Throughout all my experiments, I only changed the **bodyguard's algorithm**. The **intruder always used PPO**
 
 | # | Bodyguard | Intruder | Setup | Steps | Win Rate | Verdict |
 |---|-----------|----------|-------|-------|----------|---------|
