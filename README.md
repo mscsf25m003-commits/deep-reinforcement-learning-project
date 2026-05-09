@@ -21,22 +21,22 @@ The environment is custom code using Gymnasium.
 
 | # | Bodyguard | Intruder | Setup | Steps | Win Rate | Verdict |
 |---|-----------|----------|-------|-------|----------|---------|
-| 1 | PPO | PPO | 1v1 | 500k | 0% | ❌ Failed |
-| 2 | PPO (shared) | PPO | **2v1** | 1.4M | **100%** | ⚠️ Too easy |
-| 3 | **A2C** | PPO | 1v1 | 500k | 0% *(7 wins during training)* | 🔥 **Promising!** |
-| 4 | PPO | **Frozen** | 1v1 | 200k | 0% | ❌ Failed |
-| 5 | **SAC** | PPO | 1v1 | 500k | 0% | ❌ Failed |
-| 6 | PPO | PPO | 1v1 | **2.15M** | 0% *(100% vs scripted)* | ❌ Intruder dominates |
+| 1 | PPO | PPO | 1v1 | 500k | 0% |  Failed |
+| 2 | PPO (shared) | PPO | **2v1** | 1.4M | **100%** | Too easy |
+| 3 | **A2C** | PPO | 1v1 | 500k | 0% *(7 wins during training)* |  **Promising!** |
+| 4 | PPO | **Frozen** | 1v1 | 200k | 0% | Failed |
+| 5 | **SAC** | PPO | 1v1 | 500k | 0% |  Failed |
+| 6 | PPO | PPO | 1v1 | **2.15M** | 0% *(100% vs scripted)* |  Intruder dominates |
 
 ---
 
-## 📈 Summary 
+##  Summary 
 
 > **I built a custom 2D environment where a blue bodyguard tries to catch a red intruder before it reaches the top-left red zone. After 7 experiments and 2.15 million training steps, the bodyguard learned to catch a predictable intruder (100% win rate) but failed to beat an adaptive, learning intruder (0% win rate). The key insight: the intruder learns too fast and dominates self-play.**
 
 ---
 
-## 🔬 Experiment 1: Both Use PPO
+##  Experiment 1: Both Use PPO
 
 | Detail | Value |
 |--------|-------|
@@ -49,7 +49,7 @@ The environment is custom code using Gymnasium.
 
 ---
 
-## 🧪 Experiment 2: Two Bodyguards vs One Intruder
+##  Experiment 2: Two Bodyguards vs One Intruder
 
 | Detail | Value |
 |--------|-------|
@@ -62,7 +62,7 @@ The environment is custom code using Gymnasium.
 
 ---
 
-## 🧪 Experiment 3: Single Bodyguard
+##  Experiment 3: Single Bodyguard
 
 | Detail | Value |
 |--------|-------|
@@ -71,11 +71,11 @@ The environment is custom code using Gymnasium.
 | Total training steps | ~500,000 |
 | **Result** | **100% win rate** |
 
-**💡 My Insight:** Removing one bodyguard nothing changed because the policy is same that the bodyguard agent learn already .same problem, just ran in straight line toward where the intruder started and caught it in 5-6 steps, no strategy, no adaptation
+**My Insight:** Removing one bodyguard nothing changed because the policy is same that the bodyguard agent learn already .same problem, just ran in straight line toward where the intruder started and caught it in 5-6 steps, no strategy, no adaptation
 
 ---
 
-## 🔥 Experiment 4: Actor-Critic (A2C) for Bodyguard, PPO for Intruder
+##  Experiment 4: Actor-Critic (A2C) for Bodyguard, PPO for Intruder
 
 | Detail | Value |
 |--------|-------|
@@ -84,13 +84,13 @@ The environment is custom code using Gymnasium.
 | Total training steps | ~500,000 |
 | **Result** | **0% in final test — but 7 wins during training!** |
 
-**💡 My Insight:**  During training, I actually saw the bodyguard win 7 times. But when I saved the model and tested it, it lost every single time. Why? I think the bodyguard overfit to specific training episodes. Or maybe I interrupted training too early. The key takeaway: **the bodyguard CAN learn!** The 7 wins prove that. With more training steps (maybe 1-2 million more), I believe it would have worked. This experiment gave me hope.
+**My Insight:**  During training, I actually saw the bodyguard win 7 times. But when I saved the model and tested it, it lost every single time. Why? I think the bodyguard overfit to specific training episodes. Or maybe I interrupted training too early. The key takeaway: **the bodyguard CAN learn!** The 7 wins prove that. With more training steps (maybe 1-2 million more), I believe it would have worked. This experiment gave me hope.
 
 **My thought on the asymmetry:** The bodyguard has to chase a continuously moving, intelligent target. The intruder just has to reach a fixed zone. That's fundamentally harder for the bodyguard. The intruder's job is some how simpler than bodyguard — just run to the corner. The bodyguard has to predict, intercept, and adapt.
 
 ---
 
-## 🧊 Experiment 5: Frozen Intruder
+## Experiment 5: Frozen Intruder
 
 | Detail | Value |
 |--------|-------|
@@ -99,11 +99,11 @@ The environment is custom code using Gymnasium.
 | Total training steps | ~200,000 |
 | **Result** | **0% win rate** |
 
-**💡 My Insight:** I thought freezing the intruder would help the bodyguard learn basic chasing before facing a smart opponent. But the opposite happened. Without a challenging opponent, the bodyguard had no pressure to improve. It learned lazy habits. This taught me that **adversarial pressure is necessary for real learning** — but too much pressure too early crashes everything. It's a delicate balance.
+**My Insight:** I thought freezing the intruder would help the bodyguard learn basic chasing before facing a smart opponent. But the opposite happened. Without a challenging opponent, the bodyguard had no pressure to improve. It learned lazy habits. This taught me that **adversarial pressure is necessary for real learning** — but too much pressure too early crashes everything. It's a delicate balance.
 
 ---
 
-## 🎭 Experiment 6: SAC for Bodyguard, PPO for Intruder
+## Experiment 6: SAC for Bodyguard, PPO for Intruder
 
 | Detail | Value |
 |--------|-------|
@@ -113,11 +113,11 @@ The environment is custom code using Gymnasium.
 | Total training steps | ~500,000 |
 | **Result** | **0% win rate** |
 
-**💡 My Insight:** I chose SAC because I thought its replay buffer and frequent updates would help the bodyguard learn faster. But SAC is designed for maximum exploration — it wants to try different actions, not commit to a straight chase.The bodyguard explores random directions.
+**My Insight:** I chose SAC because I thought its replay buffer and frequent updates would help the bodyguard learn faster. But SAC is designed for maximum exploration — it wants to try different actions, not commit to a straight chase.The bodyguard explores random directions.
 
 ---
 
-## ⚔️ Experiment 7: Full Pipeline — 2.15 Million Steps
+##  Experiment 7: Full Pipeline — 2.15 Million Steps
 
 | Phase | What Happened | Steps |
 |-------|--------------|-------|
@@ -140,7 +140,7 @@ The environment is custom code using Gymnasium.
 | Self-play Round 6 | 0% |
 | **Final** | **0%** |
 
-**💡 My Insight:** The bodyguard learned to catch a predictable intruder perfectly (100%). That proves the environment works and the bodyguard CAN intercept. But as soon as the intruder started learning, everything fell apart. The intruder figured out how to evade the bodyguard's simple strategy, and the bodyguard never adapted. It's like the intruder learned faster and the bodyguard got stuck in a local optimum.
+**My Insight:** The bodyguard learned to catch a predictable intruder perfectly (100%). That proves the environment works and the bodyguard CAN intercept. But as soon as the intruder started learning, everything fell apart. The intruder figured out how to evade the bodyguard's simple strategy, and the bodyguard never adapted. It's like the intruder learned faster and the bodyguard got stuck in a local optimum.
 
 **My conclusion from this experiment:** The problem isn't that the bodyguard can't learn — it's that the intruder learns too fast. In self-play, the intruder dominates early and the bodyguard never recovers. Future work needs to slow down the intruder's learning or give the bodyguard a head start.
 
