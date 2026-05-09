@@ -1,4 +1,4 @@
-# 🛡️ Bodyguard vs Intruder: A Deep Reinforcement Learning Project
+#  Bodyguard vs Intruder: A Deep Reinforcement Learning Project
 
 I spent weeks trying to teach a blue dot (bodyguard) to catch a red dot (intruder) before it reaches the red zone. Here's everything I tried, what worked, what didn't, and what I learned.
 
@@ -6,7 +6,7 @@ I spent weeks trying to teach a blue dot (bodyguard) to catch a red dot (intrude
 
 ---
 
-## 🎯 What I Built
+##  What I Built
 
 A custom 2D game where:
 - **Blue dot (Bodyguard)** wants to catch the red dot
@@ -46,7 +46,7 @@ The environment is custom code using Gymnasium.
 | Total training steps | ~500,000 |
 | **Result** | **0% win rate** |
 
-**💡 My Insight:** Both agents used the same algorithm but the bodyguard never learned to chase. The intruder just ran straight to the zone and the bodyguard stood still.Same algorithm doesn't mean same outcome — the task asymmetry matters more than the algorithm.
+**My Insight:** Both agents used the same algorithm but the bodyguard never learned to chase. The intruder just ran straight to the zone and the bodyguard stood still.Same algorithm doesn't mean same outcome — the task asymmetry matters more than the algorithm.
 
 ---
 
@@ -131,7 +131,7 @@ The environment is custom code using Gymnasium.
 
 | Stage | Bodyguard Win Rate |
 |-------|-------------------|
-| After Phase 1 (vs scripted) | **100%** ✅ |
+| After Phase 1 (vs scripted) | **100%** |
 | After Phase 2 | 0% (intruder dominates) |
 | Self-play Round 1 | 0% |
 | Self-play Round 2 | 0% |
